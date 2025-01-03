@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: 2021 Melissa LeBlanc-Williams for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
-
 """Definition of chips."""
 A311D = "A311D"
 OS_AGNOSTIC = "OS_AGNOSTIC"
@@ -85,3 +84,5 @@ K1 = "K1"
 BCM_RANGE = {"BCM2708", "BCM2709", "BCM2711", "BCM2712", "BCM2835", "BCM2837"}
 
 CV1800B = "CV1800B"
+
+PYTEST = "PYTEST"

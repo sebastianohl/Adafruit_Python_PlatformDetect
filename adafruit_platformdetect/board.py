@@ -1,8 +1,6 @@
 # SPDX-FileCopyrightText: 2021 Melissa LeBlanc-Williams for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
-
-
 """
 `adafruit_platformdetect.board`
 ================================================================================
@@ -54,7 +52,8 @@ class Board:
 
         try:
             return os.environ["BLINKA_FORCEBOARD"]
-        except (AttributeError, KeyError):  # no forced board, continue with testing!
+        except (AttributeError,
+                KeyError):  # no forced board, continue with testing!
             pass
 
         chip_id = self.detector.chip.id
@@ -147,15 +146,11 @@ class Board:
         elif chip_id == chips.A64:
             board_id = self._pine64_id()
         elif chip_id == chips.H6:
-            board_id = (
-                self._pine64_id() or self._armbian_id() or self._repka_variants_id()
-            )
+            board_id = (self._pine64_id() or self._armbian_id()
+                        or self._repka_variants_id())
         elif chip_id == chips.H5:
-            board_id = (
-                self._armbian_id()
-                or self._allwinner_variants_id()
-                or self._repka_variants_id()
-            )
+            board_id = (self._armbian_id() or self._allwinner_variants_id()
+                        or self._repka_variants_id())
         elif chip_id == chips.H618:
             board_id = self._armbian_id() or self._allwinner_variants_id()
         elif chip_id == chips.H616:
@@ -167,13 +162,9 @@ class Board:
         elif chip_id == chips.RK3308:
             board_id = self._rock_pi_id()
         elif chip_id == chips.RK3399:
-            board_id = (
-                self._rock_pi_id()
-                or self._armbian_id()
-                or self._diet_pi_id()
-                or self._asus_tinker_board_id()
-                or self._vivid_unit_id()
-            )
+            board_id = (self._rock_pi_id() or self._armbian_id()
+                        or self._diet_pi_id() or self._asus_tinker_board_id()
+                        or self._vivid_unit_id())
         elif chip_id == chips.RK3399PRO:
             board_id = self._asus_tinker_board_id()
         elif chip_id == chips.RK3399_T:
@@ -191,13 +182,9 @@ class Board:
         elif chip_id == chips.RK3568:
             board_id = self._rk3568_id()
         elif chip_id == chips.RK3588:
-            board_id = (
-                self._rock_pi_id()
-                or self._orange_pi_id()
-                or self._armbian_id()
-                or self._rk3588_id()
-                or self._ameridroid_id()
-            )
+            board_id = (self._rock_pi_id() or self._orange_pi_id()
+                        or self._armbian_id() or self._rk3588_id()
+                        or self._ameridroid_id())
         elif chip_id == chips.RYZEN_V1605B:
             board_id = self._udoo_id()
         elif chip_id == chips.PENTIUM_N3710:
@@ -228,6 +215,8 @@ class Board:
             board_id = self._rv1103_id()
         elif chip_id == chips.RV1106:
             board_id = self._rv1106_id()
+        elif chip_id == chips.PYTEST:
+            board_id = boards.PYTEST_BOARD
         self._board_id = board_id
         return board_id
 
@@ -266,11 +255,13 @@ class Board:
             if pi_model:
                 pi_model = pi_model.upper().replace(" ", "_")
                 if "PLUS" in pi_model:
-                    re_model = re.search(r"(RASPBERRY_PI_\d).*([AB]_*)(PLUS)", pi_model)
+                    re_model = re.search(r"(RASPBERRY_PI_\d).*([AB]_*)(PLUS)",
+                                         pi_model)
                 elif "CM" in pi_model:  # untested for Compute Module
                     re_model = re.search(r"(RASPBERRY_PI_CM)(\d)", pi_model)
                 else:  # untested for non-plus models
-                    re_model = re.search(r"(RASPBERRY_PI_\d).*([AB])", pi_model)
+                    re_model = re.search(r"(RASPBERRY_PI_\d).*([AB])",
+                                         pi_model)
 
                 if re_model:
                     pi_model = "".join(re_model.groups())
@@ -299,7 +290,8 @@ class Board:
             return rev
 
         try:
-            with open("/proc/device-tree/system/linux,revision", "rb") as revision:
+            with open("/proc/device-tree/system/linux,revision",
+                      "rb") as revision:
                 rev_bytes = revision.read()
 
                 if rev_bytes[:1] == b"\x00":
@@ -326,12 +318,14 @@ class Board:
                 eeprom_bytes = eeprom.read(16)
         except FileNotFoundError:
             try:
-                with open("/sys/bus/nvmem/devices/0-00501/nvmem", "rb") as eeprom:
+                with open("/sys/bus/nvmem/devices/0-00501/nvmem",
+                          "rb") as eeprom:
                     eeprom_bytes = eeprom.read(16)
             except FileNotFoundError:
                 try:
                     # Special Case for AI64
-                    with open("/sys/bus/nvmem/devices/2-00500/nvmem", "rb") as eeprom:
+                    with open("/sys/bus/nvmem/devices/2-00500/nvmem",
+                              "rb") as eeprom:
                         eeprom_bytes = eeprom.read(16)
                 except FileNotFoundError:
                     return None
@@ -599,9 +593,9 @@ class Board:
     def _pynq_id(self) -> Optional[str]:
         """Try to detect the id for Xilinx PYNQ boards."""
         try:
-            with open(
-                "/proc/device-tree/chosen/pynq_board", "r", encoding="utf-8"
-            ) as board_file:
+            with open("/proc/device-tree/chosen/pynq_board",
+                      "r",
+                      encoding="utf-8") as board_file:
                 board_model = board_file.read()
                 match = board_model.upper().replace("-", "_").rstrip("\x00")
                 for model in boards._PYNQ_IDS:
@@ -619,7 +613,8 @@ class Board:
         board = None
         if board_value and "LubanCat-Zero" in board_value:
             board = boards.LUBANCAT_ZERO
-        if board_value and any(x in board_value for x in ("LubanCat1", "LubanCat-1")):
+        if board_value and any(x in board_value
+                               for x in ("LubanCat1", "LubanCat-1")):
             board = boards.LUBANCAT1
         if board_value and "Radxa CM3 IO" in board_value:
             board = boards.RADXA_CM3
@@ -639,7 +634,8 @@ class Board:
         """Check what type of rk3568 board."""
         board_value = self.detector.get_device_model()
         board = None
-        if board_value and any(x in board_value for x in ("LubanCat2", "LubanCat-2")):
+        if board_value and any(x in board_value
+                               for x in ("LubanCat2", "LubanCat-2")):
             board = boards.LUBANCAT2
         if board_value and "ROCK3 Model A" in board_value:
             board = boards.ROCK_PI_3A
@@ -719,9 +715,9 @@ class Board:
     def _j4105_id(self) -> Optional[str]:
         """Try to detect the id of J4105 board."""
         try:
-            with open(
-                "/sys/devices/virtual/dmi/id/board_name", "r", encoding="utf-8"
-            ) as board_name:
+            with open("/sys/devices/virtual/dmi/id/board_name",
+                      "r",
+                      encoding="utf-8") as board_name:
                 board_value = board_name.read().rstrip()
             if board_value in ("ODYSSEY-X86J41X5", "ODYSSEY-X86J41O5"):
                 return boards.ODYSSEY_X86J41X5
@@ -875,7 +871,8 @@ class Board:
             if vendor == 0x2E8A and product == 0x103A:
                 return boards.RP2040_ONE_U2IF
         # Will only reach here if a device was added in chip.py but here.
-        raise RuntimeError("RP2040_U2IF device was added to chip but not board.")
+        raise RuntimeError(
+            "RP2040_U2IF device was added to chip but not board.")
 
     # pylint: enable=too-many-return-statements
 

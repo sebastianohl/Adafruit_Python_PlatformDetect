@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: 2021 Melissa LeBlanc-Williams for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
-
 """Definition of boards and/or ids"""
 # Allow for aligned constant definitions:
 VISIONFIVE2 = "VISIONFIVE2"
@@ -235,12 +234,12 @@ MILKV_DUO = "MILKV_DUO"
 # Khadas VIM3
 KHADAS_VIM3 = "KHADAS_VIM3"
 
-_KHADAS_40_PIN_IDS = (KHADAS_VIM3,)
+_KHADAS_40_PIN_IDS = (KHADAS_VIM3, )
 
 # Vivid Unit
 VIVID_UNIT = "VIVID_UNIT"
 
-_VIVID_UNIT_IDS = (VIVID_UNIT,)
+_VIVID_UNIT_IDS = (VIVID_UNIT, )
 
 # Luckfox Pico boards
 LUCKFOX_PICO = "LUCKFOX_PICO"
@@ -252,7 +251,7 @@ LUCKFOX_PICO_PLUS = "LUCKFOX_PICO_PLUS"
 INDIEDROID_NOVA = "INDIEDROID_NOVA"
 
 # StarFive boards
-_STARFIVE_BOARD_IDS = (VISIONFIVE2,)
+_STARFIVE_BOARD_IDS = (VISIONFIVE2, )
 # Asus Tinkerboard
 _ASUS_TINKER_BOARD_IDS = (
     ASUS_TINKER_BOARD,
@@ -318,7 +317,7 @@ _BANANA_PI_IDS = (
 )
 
 # LeMaker
-_LEMAKER_IDS = (LEMAKER_BANANA_PRO,)
+_LEMAKER_IDS = (LEMAKER_BANANA_PRO, )
 
 # LubanCat
 _LUBANCAT_IDS = (
@@ -349,8 +348,8 @@ _JETSON_IDS = (
             "nvidia,storm",
         ),
     ),
-    (JETSON_TX2_NX, ("nvidia,p3509-0000+p3636-0001",)),
-    (CLARA_AGX_XAVIER, ("nvidia,e3900-0000+p2888-0004",)),
+    (JETSON_TX2_NX, ("nvidia,p3509-0000+p3636-0001", )),
+    (CLARA_AGX_XAVIER, ("nvidia,e3900-0000+p2888-0004", )),
     (
         JETSON_XAVIER,
         (
@@ -361,7 +360,8 @@ _JETSON_IDS = (
             "nvidia,galen-industrial",
         ),
     ),
-    (JETSON_NANO, ("nvidia,p3450-0000", "nvidia,p3450-0002", "nvidia,jetson-nano")),
+    (JETSON_NANO, ("nvidia,p3450-0000", "nvidia,p3450-0002",
+                   "nvidia,jetson-nano")),
     (
         JETSON_NX,
         (
@@ -406,7 +406,7 @@ _JETSON_IDS = (
     ),
 )
 
-_TI_SK_BOARD_IDS = ((TI_J721E_SK, ("ti,j721e-sk", "ti,j721e")),)
+_TI_SK_BOARD_IDS = ((TI_J721E_SK, ("ti,j721e-sk", "ti,j721e")), )
 
 _RASPBERRY_PI_40_PIN_IDS = (
     RASPBERRY_PI_B_PLUS,
@@ -443,7 +443,7 @@ _ODROID_40_PIN_IDS = (
     ODROID_M1S,
 )
 
-_ODROID_MINI_PC_IDS = (ODROID_H3,)
+_ODROID_MINI_PC_IDS = (ODROID_H3, )
 
 _BEAGLEBONE_IDS = (
     BEAGLEY_AI,
@@ -469,11 +469,11 @@ _BEAGLEBONE_IDS = (
     OSD3358_SM_RED,
 )
 
-_LINARO_96BOARDS_IDS = (DRAGONBOARD_410C,)
+_LINARO_96BOARDS_IDS = (DRAGONBOARD_410C, )
 
-_SIFIVE_IDS = (SIFIVE_UNLEASHED,)
+_SIFIVE_IDS = (SIFIVE_UNLEASHED, )
 
-_OLIMEX_IDS = (OLIMEX_LIME2,)
+_OLIMEX_IDS = (OLIMEX_LIME2, )
 
 # BeagleBone eeprom board ids from:
 #   https://github.com/beagleboard/image-builder
@@ -502,23 +502,23 @@ _BEAGLEBONE_BOARD_IDS = {
         ("C", "A335BNLT000C"),
         ("C", "A335BNLT00C0"),
     ),
-    BEAGLEBONE_BLUE: (("A2", "A335BNLTBLA2"),),
-    BEAGLEBONE_BLACK_WIRELESS: (("A5", "A335BNLTBWA5"),),
-    BEAGLEBONE_POCKETBEAGLE: (("A2", "A335PBGL00A2"),),
+    BEAGLEBONE_BLUE: (("A2", "A335BNLTBLA2"), ),
+    BEAGLEBONE_BLACK_WIRELESS: (("A5", "A335BNLTBWA5"), ),
+    BEAGLEBONE_POCKETBEAGLE: (("A2", "A335PBGL00A2"), ),
     BEAGLEBONE_GREEN: (("1A", "A335BNLT...."), ("UNKNOWN", "A335BNLTBBG1")),
-    BEAGLEBONE_GREEN_WIRELESS: (("W1A", "A335BNLTGW1A"),),
-    BEAGLEBONE_GREEN_GATEWAY: (("GA1", "A335BNLTGG1A"),),
+    BEAGLEBONE_GREEN_WIRELESS: (("W1A", "A335BNLTGW1A"), ),
+    BEAGLEBONE_GREEN_GATEWAY: (("GA1", "A335BNLTGG1A"), ),
     BEAGLEBONE_BLACK_INDUSTRIAL: (
         ("A0", "A335BNLTAIA0"),  # Arrow
         ("A0", "A335BNLTEIA0"),  # Element14
     ),
-    BEAGLEBONE_ENHANCED: (("A", "A335BNLTSE0A"),),
-    BEAGLEBONE_USOMIQ: (("6", "A335BNLTME06"),),
-    BEAGLEBONE_AIR: (("A0", "A335BNLTNAD0"),),
-    BEAGLEBONE_POCKETBONE: (("0", "A335BNLTBP00"),),
-    OSD3358_DEV_BOARD: (("0.1", "A335BNLTGH01"),),
-    OSD3358_SM_RED: (("0", "A335BNLTOS00"),),
-    BEAGLELOGIC_STANDALONE: (("A", "A335BLGC000A"),),
+    BEAGLEBONE_ENHANCED: (("A", "A335BNLTSE0A"), ),
+    BEAGLEBONE_USOMIQ: (("6", "A335BNLTME06"), ),
+    BEAGLEBONE_AIR: (("A0", "A335BNLTNAD0"), ),
+    BEAGLEBONE_POCKETBONE: (("0", "A335BNLTBP00"), ),
+    OSD3358_DEV_BOARD: (("0.1", "A335BNLTGH01"), ),
+    OSD3358_SM_RED: (("0", "A335BNLTOS00"), ),
+    BEAGLELOGIC_STANDALONE: (("A", "A335BLGC000A"), ),
 }
 
 _PI_MODELS = {
@@ -573,10 +573,13 @@ _ROCK_PI_IDS = (
 )
 
 # UDOO
-_UDOO_BOARD_IDS = {UDOO_BOLT_V8: ("SC40-2000-0000-C0|C",), UDOO_X86: ("dummy",)}
+_UDOO_BOARD_IDS = {
+    UDOO_BOLT_V8: ("SC40-2000-0000-C0|C", ),
+    UDOO_X86: ("dummy", )
+}
 
 # SeeedStudio boards
-_SEEED_BOARD_IDS = (ODYSSEY_X86J41X5,)
+_SEEED_BOARD_IDS = (ODYSSEY_X86J41X5, )
 
 # MaaXBoard boards
 _MAAXBOARD_IDS = ("MAAXBOARD", "MAAXBOARD_MINI")
@@ -607,7 +610,7 @@ _LIBRE_COMPUTER_IDS = (
 # NXP System on Module Computer boards
 NXP_IMX8MPLUS_SOM = "NXP_IMX8MPLUS_SOM"
 
-_NXP_SOM_IDS = (NXP_IMX8MPLUS_SOM,)
+_NXP_SOM_IDS = (NXP_IMX8MPLUS_SOM, )
 
 # Repka-Pi boards
 REPKA_PI_3_H5 = "REPKA_PI_3_H5"
@@ -619,7 +622,7 @@ _REPKA_PI_IDS = (
     REPKA_PI_4_H6,
 )
 
-_MILKV_IDS_ = (MILKV_DUO,)
+_MILKV_IDS_ = (MILKV_DUO, )
 
 # Luckfox
 _LUCKFOX_IDS = (
@@ -629,7 +632,10 @@ _LUCKFOX_IDS = (
     LUCKFOX_PICO_PLUS,
 )
 
-_AMERIDROID_IDS = (INDIEDROID_NOVA,)
+_AMERIDROID_IDS = (INDIEDROID_NOVA, )
 
 # Agnostic board
 OS_AGNOSTIC_BOARD = "OS_AGNOSTIC_BOARD"
+
+# Ameridroid boards
+PYTEST_BOARD = "PYTEST_BOARD"

@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: 2021 Melissa LeBlanc-Williams for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
-
 """
 `adafruit_platformdetect.chip`
 ================================================================================
@@ -42,9 +41,7 @@ class Chip:
 
     # pylint: disable=invalid-name,too-many-branches,too-many-return-statements
     @property
-    def id(
-        self,
-    ) -> Optional[str]:
+    def id(self, ) -> Optional[str]:
         """Return a unique id for the detected chip, if any."""
         # There are some times we want to trick the platform detection
         # say if a raspberry pi doesn't have the right ID, or for testing
@@ -66,10 +63,8 @@ class Chip:
                 # look for it based on PID/VID
                 count = len(UsbTools.find_all([(0x0403, 0x6014)]))
                 if count == 0:
-                    raise RuntimeError(
-                        "BLINKA_FT232H environment variable "
-                        + "set, but no FT232H device found"
-                    )
+                    raise RuntimeError("BLINKA_FT232H environment variable " +
+                                       "set, but no FT232H device found")
                 self._chip_id = chips.FT232H
                 return self._chip_id
             if os.environ.get("BLINKA_FT2232H"):
@@ -78,10 +73,8 @@ class Chip:
                 # look for it based on PID/VID
                 count = len(UsbTools.find_all([(0x0403, 0x6010)]))
                 if count == 0:
-                    raise RuntimeError(
-                        "BLINKA_FT2232H environment variable "
-                        + "set, but no FT2232H device found"
-                    )
+                    raise RuntimeError("BLINKA_FT2232H environment variable " +
+                                       "set, but no FT2232H device found")
                 self._chip_id = chips.FT2232H
                 return self._chip_id
             if os.environ.get("BLINKA_MCP2221"):
@@ -89,13 +82,12 @@ class Chip:
 
                 # look for it based on PID/VID
                 for dev in hid.enumerate():
-                    if dev["vendor_id"] == 0x04D8 and dev["product_id"] == 0x00DD:
+                    if dev["vendor_id"] == 0x04D8 and dev[
+                            "product_id"] == 0x00DD:
                         self._chip_id = chips.MCP2221
                         return self._chip_id
-                raise RuntimeError(
-                    "BLINKA_MCP2221 environment variable "
-                    + "set, but no MCP2221 device found"
-                )
+                raise RuntimeError("BLINKA_MCP2221 environment variable " +
+                                   "set, but no MCP2221 device found")
             if os.environ.get("BLINKA_OS_AGNOSTIC"):
                 # we don't need to look for this chip, it's just a flag
                 self._chip_id = chips.OS_AGNOSTIC
@@ -110,18 +102,12 @@ class Chip:
                     # NOTE: If any products are added here, they need added
                     # to _rp2040_u2if_id() in board.py as well.
                     # pylint: disable=too-many-boolean-expressions
-                    if (
-                        (
+                    if ((
                             # Raspberry Pi Pico
-                            vendor == 0xCAFE
-                            and product == 0x4005
-                        )
-                        or (
-                            # Waveshare RP2040 One
-                            vendor == 0x2E8A
-                            and product == 0x103A
-                        )
-                        or (
+                            vendor == 0xCAFE and product == 0x4005) or (
+                                # Waveshare RP2040 One
+                                vendor == 0x2E8A and product == 0x103A) or
+                        (
                             # Feather RP2040
                             # Itsy Bitsy RP2040
                             # QT Py RP2040
@@ -130,9 +116,7 @@ class Chip:
                             # Feather RP2040 ThinkInk
                             # Feather RP2040 RFM
                             # Feather RP2040 CAN Bus
-                            vendor == 0x239A
-                            and product
-                            in (
+                            vendor == 0x239A and product in (
                                 0x00F1,
                                 0x00FD,
                                 0x00F7,
@@ -142,27 +126,25 @@ class Chip:
                                 0x812E,
                                 0x8130,
                                 0x0105,
-                            )
-                        )
-                    ):
+                            ))):
                         self._chip_id = chips.RP2040_U2IF
                         return self._chip_id
-                raise RuntimeError(
-                    "BLINKA_U2IF environment variable "
-                    + "set, but no compatible device found"
-                )
+                raise RuntimeError("BLINKA_U2IF environment variable " +
+                                   "set, but no compatible device found")
             if os.environ.get("BLINKA_GREATFET"):
                 import usb
 
-                if usb.core.find(idVendor=0x1D50, idProduct=0x60E6) is not None:
+                if usb.core.find(idVendor=0x1D50,
+                                 idProduct=0x60E6) is not None:
                     self._chip_id = chips.LPC4330
                     return self._chip_id
-                raise RuntimeError(
-                    "BLINKA_GREATFET environment variable "
-                    + "set, but no GreatFET device found"
-                )
+                raise RuntimeError("BLINKA_GREATFET environment variable " +
+                                   "set, but no GreatFET device found")
             if os.environ.get("BLINKA_NOVA"):
                 self._chip_id = chips.BINHO
+                return self._chip_id
+            if os.environ.get("BLINKA_PYTEST"):
+                self._chip_id = chips.PYTEST
                 return self._chip_id
 
         platform = sys.platform
@@ -327,7 +309,8 @@ class Chip:
         if hardware is None:
             vendor_id = self.detector.get_cpuinfo_field("vendor_id")
             if vendor_id == "AuthenticAMD":
-                model_name = self.detector.get_cpuinfo_field("model name").upper()
+                model_name = self.detector.get_cpuinfo_field(
+                    "model name").upper()
                 if "RYZEN EMBEDDED V1202B" in model_name:
                     linux_id = chips.RYZEN_V1202B
                 if "RYZEN EMBEDDED V1605B" in model_name:
@@ -336,7 +319,8 @@ class Chip:
                     linux_id = chips.GENERIC_X86
             ##            print("linux_id = ", linux_id)
             elif vendor_id == "GenuineIntel":
-                model_name = self.detector.get_cpuinfo_field("model name").upper()
+                model_name = self.detector.get_cpuinfo_field(
+                    "model name").upper()
                 ##                print('model_name =', model_name)
                 if "N3710" in model_name:
                     linux_id = chips.PENTIUM_N3710
@@ -366,9 +350,8 @@ class Chip:
             if compatible and "odroid-c2" in compatible:
                 linux_id = chips.S905
             if compatible and "amlogic" in compatible:
-                compatible_list = (
-                    compatible.replace("\x00", ",").replace(" ", "").split(",")
-                )
+                compatible_list = (compatible.replace("\x00", ",").replace(
+                    " ", "").split(","))
                 if "g12a" in compatible_list:
                     # 'sm1' is correct for S905X3, but some kernels use 'g12a'
                     return chips.S905X3
@@ -401,7 +384,8 @@ class Chip:
             # conditions attempt.
             if not linux_id:
                 hardware = [
-                    entry.replace("\x00", "") for entry in compatible.split(",")
+                    entry.replace("\x00", "")
+                    for entry in compatible.split(",")
                 ]
 
         if not linux_id:
